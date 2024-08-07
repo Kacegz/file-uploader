@@ -1,0 +1,29 @@
+<%-include("header")%>
+<div
+  class="container d-flex min-vh-100 w-25 justify-content-center align-items-center flex-column gap-3"
+>
+  <a href="./" class="align-self-start"
+    ><button class="btn btn-primary w-10">Go back</button></a
+  >
+  <form
+    action="/register"
+    method="post"
+    class="d-flex justify-content-center align-items-center flex-column gap-3"
+  >
+    <h1>Register to dropit!</h1>
+    <% if( typeof(error) !="undefined"){ %>
+    <h2 class="text-warning bold"><%= error %></h2>
+    <% } %>
+    <div class="form-floating mb-3 w-75">
+      <input type="text" name="username" id="" class="form-control" />
+      <label for="username">Username</label>
+    </div>
+
+    <div class="form-floating mb-3 w-75">
+      <input type="password" name="password" id="" class="form-control" />
+      <label for="password">Password</label>
+    </div>
+    <input type="submit" value="register" class="btn btn-primary w-50 mb-3" />
+  </form>
+</div>
+<%-include("footer")%>

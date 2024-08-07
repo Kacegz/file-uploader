@@ -1,5 +1,21 @@
-<html>
-  <body>
-    <%= message %>
-  </body>
-</html>
+<%-include("header")%>
+
+<div
+  class="container d-flex min-vh-100 justify-content-center align-items-center flex-column"
+>
+  <h1>Welcome to Dropit!</h1>
+  <% if( typeof(error) !="undefined"){ %> <%= error %> <% } %> <% if(
+  typeof(user) !="undefined"){ %> <%= user.username %>
+  <a href="/logout"
+    ><button class="btn btn-primary">Click here to logout</button></a
+  >
+  <% }else{ %>
+  <a href="/login"
+    ><button class="btn btn-primary">Click here to login</button></a
+  ><br />
+  <a href="/register"
+    ><button class="btn btn-primary">click here to register</button></a
+  >
+  <% }%>
+</div>
+<%-include("footer")%>
