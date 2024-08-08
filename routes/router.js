@@ -1,5 +1,15 @@
 const { Router } = require("express");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + ".png"); //Appending .jpg
+  },
+});
+const upload = multer({ dest: "uploads/", storage: storage });
 
 const userController = require("../controllers/userController");
 
@@ -43,15 +53,21 @@ userRouter.get("/login", userController.loginController);
 userRouter.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/:id/storage",
     failureRedirect: "/login",
-    failureMessage: true,
+    successRedirect: "/storage",
   })
 );
 userRouter.get("/register", userController.registerControllerGET);
 userRouter.post("/register", userController.registerControllerPOST);
 userRouter.get("/logout", userController.logoutController);
 
-userRouter.get("/:id/storage", userController.storageController);
+userRouter.get("/storage", userController.storageController);
+userRouter.post(
+  "/newFile",
+  upload.single("file"),
+  userController.newFileController
+);
+userRouter.post("/newCategory", userController.newCategoryController);
+userRouter.post("/removeCategory/:id", userController.removeCategoryController);
 
 module.exports = userRouter;

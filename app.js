@@ -27,6 +27,7 @@ app.use(
     }),
   })
 );
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(passport.session());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

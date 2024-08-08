@@ -1,16 +1,46 @@
 <%-include("header")%>
 
 <div
-  class="container min-vh-100 min-vw-100 text-center flex-column d-flex"
+  class="container min-vh-100 min-vw-100 text-center flex-column align-items-center d-flex"
 >
-<div class=".navbar bg-primary navbar-expand-lg ">Hello <%-user.username%>! Welcome to your storage!
+<h1 class=".navbar p-3 text-white navbar-expand-lg ">Hello<% if( typeof(user) !="undefined"){ %> <%= user.username %> <% } %>! Welcome to your storage!
+</h1>
+<a href="/logout"
+><button class="btn btn-primary">Click here to logout</button></a
+>
+<div class="flex-fill container row min-vw-100">
+  <div class="col col-2 d-flex flex-column justify-content-center align-items-center">
+    <form action="/newCategory" method="post" style="width:10vw">
+      <input type="text" name="name" class="form-control"  required/>
+      <input type="submit" value="Send" class="btn btn-primary">
+      </form> 
+    <% categories.forEach((category)=>{%>
+  <div class="card m-2 w-100">
+    <h5 class="card-title"><%-category%></h5>
+    <form action="/removeCategory/<%-category%>" method="POST"><input type="submit" value="Delete" class="btn btn-danger w-100""></form>
+  </div>
+  
+  <%});%>
+  </div>
+  <div class="col d-flex flex-wrap justify-content-center">
+    <% files.forEach((file) => { %>
+      <div class="card m-3" style="width: 15rem;" >
+        <img src="/uploads/<%- file %>" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">File name</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+        
+      <% }) %>
+  </div>
+
 </div>
-<div class="flex-fill">
-a
-</div>
-<div class="footer">
-  <form action="/newFile" method="post" enctype="multipart/form-data">
+<div class="footer w-25 m-4">
+  <form action="/newFile" method="post" enctype="multipart/form-data" class="d-flex gap-2">
     <input  class="form-control" type="file" name="file" />
+    <input type="submit" value="Send" class="btn btn-primary">
   </form>
 </div>
 </div>
