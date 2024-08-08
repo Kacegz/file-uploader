@@ -42,10 +42,14 @@ const logoutController = asyncHandler(async (req, res) => {
     res.redirect("/");
   });
 });
+const storageController = asyncHandler(async (req, res) => {
+  res.render("storage", { user: req.user });
+});
 module.exports = {
   userController,
   loginController,
   registerControllerGET,
   registerControllerPOST,
   logoutController,
+  storageController,
 };

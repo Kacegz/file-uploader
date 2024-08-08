@@ -1,0 +1,17 @@
+<%-include("header")%>
+
+<div
+  class="container min-vh-100 min-vw-100 text-center flex-column d-flex"
+>
+<div class=".navbar bg-primary navbar-expand-lg ">Hello <%-user.username%>! Welcome to your storage!
+</div>
+<div class="flex-fill">
+a
+</div>
+<div class="footer">
+  <form action="/newFile" method="post" enctype="multipart/form-data">
+    <input  class="form-control" type="file" name="file" />
+  </form>
+</div>
+</div>
+<%-include("footer")%>

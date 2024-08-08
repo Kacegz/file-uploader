@@ -43,7 +43,7 @@ userRouter.get("/login", userController.loginController);
 userRouter.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/:id/storage",
     failureRedirect: "/login",
     failureMessage: true,
   })
@@ -51,5 +51,7 @@ userRouter.post(
 userRouter.get("/register", userController.registerControllerGET);
 userRouter.post("/register", userController.registerControllerPOST);
 userRouter.get("/logout", userController.logoutController);
+
+userRouter.get("/:id/storage", userController.storageController);
 
 module.exports = userRouter;
